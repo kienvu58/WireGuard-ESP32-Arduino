@@ -59,7 +59,7 @@ struct wireguardif_init_data {
 struct wireguardif_peer {
 	const char *public_key;
 	// Optional pre-shared key (32 bytes) - make sure this is NULL if not to be used
-	const uint8_t *preshared_key;
+	const char *preshared_key;
 	// tai64n of largest timestamp we have seen during handshake to avoid replays
 	uint8_t greatest_timestamp[12];
 
