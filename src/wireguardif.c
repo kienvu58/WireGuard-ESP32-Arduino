@@ -64,6 +64,10 @@ static void update_peer_addr(struct wireguard_peer *peer, const ip_addr_t *addr,
 
 static struct wireguard_peer *peer_lookup_by_allowed_ip(struct wireguard_device *device, const ip_addr_t *ipaddr)
 {
+	if (device == NULL) {
+    	   return NULL;
+    	}
+	
 	struct wireguard_peer *result = NULL;
 	struct wireguard_peer *tmp;
 	int x;
