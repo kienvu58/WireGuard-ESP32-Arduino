@@ -258,6 +258,7 @@ void wireguard_start_session(struct wireguard_peer *peer, bool initiator);
 
 void keypair_update(struct wireguard_peer *peer, struct wireguard_keypair *received_keypair);
 void keypair_destroy(struct wireguard_keypair *keypair);
+void handshake_destroy(struct wireguard_handshake *handshake);
 
 struct wireguard_keypair *get_peer_keypair_for_idx(struct wireguard_peer *peer, uint32_t idx);
 bool wireguard_check_replay(struct wireguard_keypair *keypair, uint64_t seq);
