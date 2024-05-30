@@ -48,7 +48,7 @@
 #include "wireguard.h"
 #include "crypto.h"
 #include "esp_log.h"
-#include "tcpip_adapter.h"
+#include "esp_netif.h"
 
 #include "esp32-hal-log.h"
 
@@ -64,6 +64,10 @@ static void update_peer_addr(struct wireguard_peer *peer, const ip_addr_t *addr,
 
 static struct wireguard_peer *peer_lookup_by_allowed_ip(struct wireguard_device *device, const ip_addr_t *ipaddr)
 {
+	if (device == NULL) {
+    	   return NULL;
+    	}
+	
 	struct wireguard_peer *result = NULL;
 	struct wireguard_peer *tmp;
 	int x;
@@ -1113,7 +1117,7 @@ err_t wireguardif_init(struct netif *netif)
 	size_t private_key_len = sizeof(private_key);
 
 	struct netif *underlying_netif;
-	tcpip_adapter_get_netif(TCPIP_ADAPTER_IF_STA, &underlying_netif);
+	underlying_netif = netif_default;
 	log_i(TAG "underlying_netif = %p", underlying_netif);
 
 	LWIP_ASSERT("netif != NULL", (netif != NULL));
